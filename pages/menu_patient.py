@@ -1,8 +1,10 @@
-import csv
-from datetime import datetime, date
+
+from datetime import datetime
+from datetime import date
 
 from config.db import STAF_FILE, ANTRIAN_FILE, PASIEN_FILE, RIWAYAT_MEDIS_FILE, DETAIL_RESEP_FILE
-from utils.crud import read_csv, append_csv, write_csv, generate_id, log_aktivitas
+from utils.crud import read_csv, append_csv, write_csv, generate_id
+from pages.auth import log_aktivitas
 
 
 # ==================== MENU PASIEN ====================
