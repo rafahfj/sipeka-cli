@@ -3,8 +3,6 @@ from datetime import date
 
 from config.db import ANTRIAN_FILE, PASIEN_FILE, RIWAYAT_MEDIS_FILE, STAF_FILE
 from pages.auth import log_aktivitas
-from utils.crud import read_csv, write_csv
-
 
 
 def menu_resepsionis(user):
