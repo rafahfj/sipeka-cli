@@ -1,8 +1,6 @@
 # ==================== MAIN PROGRAM ====================
-from pages import menu_admin, menu_dokter
+from pages import menu_admin, menu_dokter, menu_pasien, menu_resepsionis
 from pages.auth import login
-from pages.menu_patient import menu_pasien
-from pages.menu_reseptionst import menu_resepsionis
 from utils.init_db import init_database
 from pages.regist_patient import registrasi_pasien
 
