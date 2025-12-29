@@ -1,9 +1,8 @@
 # ==================== MAIN PROGRAM ====================
-from pages import menu_admin, menu_dokter, menu_pasien, menu_resepsionis
+from pages import menu_admin, menu_dokter, menu_patient, menu_reseptionst
 from pages.auth import login
 from utils.init_db import init_database
 from pages.regist_patient import registrasi_pasien
-
 
 def main():
     """Program utama SIPEKA"""
@@ -28,11 +27,11 @@ def main():
             user, role = login()
             if user and role:
                 if role == "Pasien":
-                    menu_pasien(user)
+                    menu_patient(user)
                 elif role == "Dokter":
                     menu_dokter(user)
                 elif role == "Resepsionis":
-                    menu_resepsionis(user)
+                    menu_reseptionst(user)
                 elif role == "Admin":
                     menu_admin(user)
         elif pilihan == "2":

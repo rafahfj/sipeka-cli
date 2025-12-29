@@ -1,15 +1,6 @@
-import csv
-import os
-import hashlib
-import uuid
-import msvcrt
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(BASE_DIR, "data")
-PASIEN_FILE = os.path.join(DATA_DIR, "pasien.csv")
-
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
+import pwinput
+from config.db import PASIEN_FILE
+from utils.crud import hash_password, append_csv, read_csv, generate_id
 
 def input_wajib(prompt):
     nilai = input(prompt).strip()
@@ -17,49 +8,6 @@ def input_wajib(prompt):
         print("\n---Input tidak boleh kosong!---")
         return None
     return nilai
-
-def generate_id(prefix=""):
-    return f"{prefix}{uuid.uuid4().hex[:8]}"
-
-def read_csv(file_path):
-    data = []
-    if os.path.exists(file_path):
-        with open(file_path, 'r', newline='', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            data = list(reader)
-    return data
-
-def append_csv(file_path, row_data):
-    dir_path = os.path.dirname(file_path)
-    if not os.path.exists(dir_path):
-        os.makedirs(dir_path, exist_ok=True)
-
-    file_exists = os.path.exists(file_path)
-
-    with open(file_path, 'a', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=row_data.keys())
-        if not file_exists:
-            writer.writeheader()
-        writer.writerow(row_data)
-
-def masked_input(prompt=""):
-    print(prompt, end="", flush=True)
-    password = ""
-    while True:
-        char = msvcrt.getch()
-
-        if char in (b'\r', b'\n'): 
-            print()
-            return password
-
-        if char == b'\x08':
-            if password:
-                password = password[:-1]
-                print('\b \b', end="", flush=True)
-        else:
-            ch = char.decode('utf-8', errors='ignore')
-            password += ch
-            print('*', end="", flush=True)
 
 def registrasi_pasien():
     print("\n" + "=" * 50)
@@ -92,12 +40,12 @@ def registrasi_pasien():
         print("\n---NIK harus 16 digit angka!---")
         return
 
-    password = masked_input("Password: ")
+    password = pwinput.pwinput(prompt="Password: ", mask="*")
     if password == "":
         print("\n---Password tidak boleh kosong!---")
         return
 
-    confirm_password = masked_input("Konfirmasi Password: ")
+    confirm_password = pwinput.pwinput(prompt="Konfirmasi Password: ", mask="*")
     if confirm_password == "":
         print("\n---Konfirmasi password tidak boleh kosong!---")
         return
