@@ -41,7 +41,6 @@ def registrasi_pasien():
         return
 
     password = pwinput.pwinput(prompt="Password: ", mask="*")
-    
     if password == "":
         print("\n---Password tidak boleh kosong!---")
         return

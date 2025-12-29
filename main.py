@@ -4,7 +4,6 @@ from pages.auth import login
 from utils.init_db import init_database
 from pages.regist_patient import registrasi_pasien
 
-
 def main():
     """Program utama SIPEKA"""
     init_database()
