@@ -1,6 +1,5 @@
 import utils.crud as db
 import datetime
-from config.db import STAF_FILE
 
 # ==================== MENU DOKTER ====================
 
@@ -65,7 +64,16 @@ def periksa_pasien():
         
     input("Tekan Enter untuk kembali...")
 
-def menu_dokter(dokter):
+def menu_dokter(user):
+    jabatan = user.get('jabatan', '').strip()
+    if jabatan not in ['Admin', 'Dokter']:
+        print("\n" + "!"*50)
+        print(f"[AKSES DITOLAK] Maaf {user['nama']},")
+        print("Menu ini hanya khusus untuk Dokter atau Admin.")
+        print("!"*50)
+        input("\nTekan Enter untuk kembali...")
+        return
+    
     while True:
         print("\n=== MENU DOKTER SIPEKA ===")
         print("1. Lihat Daftar Antrian")
