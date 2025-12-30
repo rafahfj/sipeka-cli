@@ -7,7 +7,7 @@ from pages.auth import log_aktivitas
 
 
 # ==================== MENU PASIEN ====================
-def menu_pasien(user):
+def menu_patient(user):
     """Menu utama untuk pasien"""
     while True:
         print("\n" + "="*50)
