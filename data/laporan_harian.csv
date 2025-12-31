@@ -5,3 +5,18 @@ LOGd37775a1,ADM4a432c09,2025-12-30 12:45:54,Login Admin berhasil
 LOG4cdb28e5,ADM4a432c09,2025-12-30 12:54:36,Login Admin berhasil
 LOGd8b92c9e,ADM4a432c09,2025-12-30 13:04:33,Login Admin berhasil
 LOG6984fdd5,ADM4a432c09,2025-12-30 13:06:12,Logout admin
+LOG70bac453,PAS9f8b4966,2025-12-30 13:33:33,Login pasien berhasil
+LOGaf1a0e95,PAS9f8b4966,2025-12-30 13:33:53,Logout pasien
+LOG3b6c03fd,ADM4a432c09,2025-12-30 13:34:10,Login Admin berhasil
+LOG44c5fb9b,ADM4a432c09,2025-12-30 13:37:52,Logout admin
+LOGd98691ad,STF12fb0693,2025-12-30 13:38:19,Login Dokter berhasil
+LOGb881df2a,STFfc5f25f4,2025-12-30 13:38:56,Login Resepsionis berhasil
+LOG01954b93,PAS9f8b4966,2025-12-30 13:40:03,Login pasien berhasil
+LOG345c21b0,PAS9f8b4966,2025-12-30 13:40:20,Daftar antrian A-001
+LOG959ac98b,STF12fb0693,2025-12-30 13:41:41,Login Dokter berhasil
+LOG53138d90,STF12fb0693,2025-12-31 06:33:15,Login Dokter berhasil
+LOG3feeab02,PAS9f8b4966,2025-12-31 06:36:52,Daftar antrian A-001
+LOGa0c41433,PAS9b6bd01f,2025-12-31 06:51:08,Login pasien berhasil
+LOG2ba49418,PAS9b6bd01f,2025-12-31 06:51:50,Daftar antrian A-001
+LOGb6f4594e,STF12fb0693,2025-12-31 06:56:10,Pemeriksaan pasien Rafah
+LOGa986a52d,PAS9b6bd01f,2025-12-31 06:59:07,Update profil pasien
