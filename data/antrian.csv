@@ -1,11 +1,2 @@
 id_antrian,id_pasien,id_dokter,no_antrian,keluhan,tanggal,jam,status_antrian,catatan
-ANT23b56b1d,PAS2a82fd4f,STF06548f3c,A-001,mata sakit,2025-12-30,21:13:30,selesai,
-ANT82d76d22,PAS2a82fd4f,STF06548f3c,A-002,sakit mata,2025-12-30,21:27:19,Diverifikasi,
-ANT167e30dc,PAS2a82fd4f,STF06548f3c,A-001,sakit di dada,2025-12-31,00:12:59,selesai,
-ANT5feb9b1b,PAS2a82fd4f,STF06548f3c,A-002,ACL,2025-12-31,12:21:50,selesai,
-ANTe8496b5d,PAS2a82fd4f,STF06548f3c,A-003,sakit kepala,2025-12-31,12:25:33,selesai,
-ANT5efe9ae9,PAS2a82fd4f,STF06548f3c,A-004,demam,2025-12-31,12:33:59,selesai,
-ANT137b14ed,PAS2a82fd4f,STF06548f3c,A-005,demam,2025-12-31,12:35:07,selesai,
-ANT8484ce45,PAS2a82fd4f,STF06548f3c,A-006,demam tinggi,2025-12-31,12:46:26,selesai,
-ANT33adde26,PAS2a82fd4f,STF06548f3c,A-007,sakit perut,2025-12-31,12:49:51,selesai,
-ANTaa03db03,PAS2a82fd4f,STF06548f3c,A-008,sakit perut,2025-12-31,12:51:06,selesai,
+ANT0cecee6e,PAS9b6bd01f,STF12fb0693,A-001,Ya Begitulah,2025-12-31,06:51:50,Diverifikasi,

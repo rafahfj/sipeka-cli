@@ -26,11 +26,19 @@ def read_csv(file_path):
     return data
 
 def write_csv(file_path, data, fieldnames):
-    """Menulis ulang seluruh data ke CSV"""
+    """Menulis data ke CSV - ANTI CORRUPT"""
+    # BERSIHKAN DATA DARI FIELD EKSTRA
+    clean_data = []
+    for row in data:
+        clean_row = {}
+        for field in fieldnames:
+            clean_row[field] = row.get(field, '')
+        clean_data.append(clean_row)
+    
     with open(file_path, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(data)
+        writer.writerows(clean_data)
 
 def append_csv(file_path, row_data):
     """Menambahkan satu baris data baru ke akhir CSV"""

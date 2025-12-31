@@ -69,8 +69,9 @@ def verifikasi_antrian():
 
     antrian_list = read_csv(ANTRIAN_FILE)
     pasien_list = read_csv(PASIEN_FILE)
+    today = date.today().strftime("%Y-%m-%d")
 
-    antrian = next((a for a in antrian_list if a['no_antrian'] == no_antrian), None)
+    antrian = next((a for a in antrian_list if a['no_antrian'] == no_antrian and a['tanggal'] == today), None)
 
     if not antrian:
         print(">>> Antrian tidak ditemukan!")
