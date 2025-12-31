@@ -1,2 +1,2 @@
-id_pasien,nama,NIK,password,alamat,no_telp,jenis_kelamin,email,tanggal_lahirPAS2a82fd4f,
-PASf8622fba,rifa,1234567891234567,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,Karawang,081223845470,L,rifa@gmail.com,2007-04-29
+id_pasien,nama,NIK,password,alamat,no_telp,jenis_kelamin,email,tanggal_lahir
+PAS2a82fd4f,rifa,1234567891234567,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,Karawang,081223845470,L,rifa@gmail.com,2007-04-29

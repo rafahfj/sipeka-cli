@@ -1,5 +1,8 @@
 # ==================== MAIN PROGRAM ====================
-from pages import menu_admin, menu_dokter, menu_patient, menu_reseptionst
+from pages.menu_admin import menu_admin
+from pages.menu_dokter import menu_dokter
+from pages.menu_patient import menu_patient
+from pages.menu_receptionist import menu_receptionist
 from pages.auth import login
 from utils.init_db import init_database
 from pages.regist_patient import registrasi_pasien
@@ -31,7 +34,7 @@ def main():
                 elif role == "Dokter":
                     menu_dokter(user)
                 elif role == "Resepsionis":
-                    menu_reseptionst(user)
+                    menu_receptionist(user)
                 elif role == "Admin":
                     menu_admin(user)
         elif pilihan == "2":

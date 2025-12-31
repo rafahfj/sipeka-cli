@@ -1,8 +1,10 @@
-# ==================== AUTENTIKASI ====================
+import pwinput
 from datetime import datetime
 from utils.crud import read_csv, append_csv
 from utils.crud import hash_password
 from utils.crud import generate_id
+
+# ==================== AUTENTIKASI ====================
 
 from config.db import PASIEN_FILE, STAF_FILE, LAPORAN_HARIAN_FILE
 
@@ -28,7 +30,11 @@ def login_pasien():
     """Login untuk pasien"""
     print("\n--- Login Pasien ---")
     email = input("Email: ")
-    password = input("Password: ")
+    password = pwinput.pwinput("Password: ", mask="*")
+
+    if not email.strip() or not password.strip():
+        print("\n>>> Email dan Password tidak boleh kosong!")
+        return None, None
 
     pasien_list = read_csv(PASIEN_FILE)
     for pasien in pasien_list:

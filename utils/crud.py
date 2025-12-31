@@ -94,9 +94,14 @@ def ambil_antrian_dokter():
             
     return antrian_bersih
 
-def simpan_diagnosa(data_diagnosa):
+def simpan_diagnosa(data_diagnosa, data_resep):
     """Menyimpan hasil pemeriksaan ke riwayat_medis.csv"""
     append_csv(RIWAYAT_MEDIS_FILE, data_diagnosa)
+
+    with open('data/detail_resep.csv', 'a', newline='') as f:
+        id_resep = f"RES-{data_diagnosa['id_antrian']}"
+        BarisBaru = f"\n{id_resep},{data_diagnosa['id_antrian']},{data_resep['obat']},{data_resep['dosis']},{data_resep['aturan_pakai']}"
+        f.write(BarisBaru)
 
 def update_status_antrian(id_antrian_target, status_baru='selesai'):
     """Mengupdate status di antrian.csv menjadi 'selesai'"""

@@ -1,28 +1,12 @@
-import csv
-import os
 from datetime import date
+from utils.crud import read_csv, write_csv
 
 from config.db import ANTRIAN_FILE, PASIEN_FILE, RIWAYAT_MEDIS_FILE, STAF_FILE
 from .auth import log_aktivitas
 from .regist_patient import registrasi_pasien
 
-def read_csv(file_path):
-    """Membaca data dari CSV"""
-    data = []
-    if os.path.exists(file_path):
-        with open(file_path, 'r', newline='', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            data = list(reader)
-    return data
 
-def write_csv(file_path, data, fieldnames):
-    """Menulis data ke CSV"""
-    with open(file_path, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(data)
-
-def menu_resepsionis(user):
+def menu_receptionist(user):
     """Menu utama untuk resepsionis"""
     while True:
         print("\n" + "="*50)

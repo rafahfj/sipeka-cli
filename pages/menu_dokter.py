@@ -22,40 +22,45 @@ def tampilkan_antrian():
         
     return antrian
 
-def periksa_pasien():
+def periksa_pasien(dokter):
     list_antrian = tampilkan_antrian()
-    
+
     if not list_antrian:
+        print("Tidak ada pasien dalam antrian saat ini.")
+        print("-" * 60)
         input("\nTekan Enter untuk kembali...")
         return
 
-    print("\n" + "-"*60)
-    pilihan = input("Pilih Nomor Urut Pasien yang akan diperiksa (contoh: 1): ")
-    
-    if not pilihan.isdigit() or int(pilihan) < 1 or int(pilihan) > len(list_antrian):
-        print("Pilihan tidak valid.")
-        input("Tekan Enter...")
-        return
-
-    pasien_terpilih = list_antrian[int(pilihan) - 1]
+    pasien_terpilih = list_antrian[0]
     
     print(f"\n[SEDANG MEMERIKSA] : {pasien_terpilih['nama']}")
-    print(f"Keluhan            : {pasien_terpilih['keluhan']}")
+    print(f"Keluhan : {pasien_terpilih['keluhan']}")
     print("-" * 30)
-    
+
     diagnosa = input("Masukkan Diagnosa : ")
-    resep = input("Masukkan Resep    : ")
+    print("\n--- RESEP OBAT ---")
+    nama_obat    = input("Nama Obat    : ")
+    dosis        = input("Dosis (mg/gr): ")
+    aturan_pakai = input("Aturan Pakai : ")
+    catatan      = input("Catatan Tambahan (opsional): ")
     
-    konfirmasi = input("\nSimpan hasil pemeriksaan? (y/n): ")
+    konfirmasi = input("\nSimpan data pemeriksaan & resep? (y/n): ")
     if konfirmasi.lower() == 'y':
         data_simpan = {
             'id_antrian': pasien_terpilih['id_antrian'],
             'id_pasien': pasien_terpilih['id_pasien'],
+            'id_dokter': dokter['id_user'],
+            'keluhan': pasien_terpilih['keluhan'],
             'diagnosa': diagnosa,
-            'resep_obat': resep,
-            'tanggal_periksa': datetime.datetime.now().strftime("%Y-%m-%d")
+            'tanggal_periksa': datetime.datetime.now().strftime("%Y-%m-%d"),
+            'catatan': catatan
         }
-        db.simpan_diagnosa(data_simpan)
+        data_resep = {
+            'obat': nama_obat,
+            'dosis': dosis,
+            'aturan_pakai': aturan_pakai
+        }
+        db.simpan_diagnosa(data_simpan, data_resep)
         db.update_status_antrian(pasien_terpilih['id_antrian'], 'selesai')
         
         print("\n[SUKSES] Data berhasil disimpan dan status antrian diperbarui.")
@@ -86,7 +91,7 @@ def menu_dokter(user):
             tampilkan_antrian()
             input("\nTekan Enter kembali...")
         elif opsi == '2':
-            periksa_pasien()
+            periksa_pasien(user)
         elif opsi == '3':
             break
         else:

@@ -40,12 +40,12 @@ def registrasi_pasien():
         print("\n---NIK harus 16 digit angka!---")
         return
 
-    password = pwinput.pwinput(prompt="Password: ", mask="*")
+    password = pwinput.pwinput("Password: ", mask="*")
     if password == "":
         print("\n---Password tidak boleh kosong!---")
         return
 
-    confirm_password = pwinput.pwinput(prompt="Konfirmasi Password: ", mask="*")
+    confirm_password = pwinput.pwinput("Konfirmasi Password: ", mask="*")
     if confirm_password == "":
         print("\n---Konfirmasi password tidak boleh kosong!---")
         return
