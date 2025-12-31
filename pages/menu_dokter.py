@@ -17,61 +17,71 @@ def menu_dokter(user):
         print("[3] Lihat Riwayat Medis Pasien")
         print("[0] Logout")
 
-        pilihan = input("\nPilih menu: ")
+def tampilkan_antrian():
+    print("="*60)
+    print("HALAMAN DOKTER - DAFTAR ANTRIAN PASIEN")
+    print("="*60)
+    
+    antrian = db.ambil_antrian_dokter()
+    
+    if not antrian:
+        print("\nTidak ada pasien dalam antrian saat ini.")
+        return []
+    
+    print(f"{'No':<4} | {'ID Antrian':<12} | {'Nama Pasien':<20} | {'Keluhan':<15}")
+    print("-" * 60)
+    
+    for i, pasien in enumerate(antrian):
+        print(f"{i+1:<4} | {pasien['id_antrian']:<12} | {pasien['nama']:<20} | {pasien['keluhan']:<15}")
+        
+    return antrian
 
-        if pilihan == "1":
-            lihat_daftar_antrian_dokter(user)
-        elif pilihan == "2":
-            periksa_pasien(user)
-        elif pilihan == "3":
-            lihat_riwayat_medis_dokter()
-        elif pilihan == "0":
-            log_aktivitas(user['id_user'], "Logout dokter")
-            print("\n>>> Logout berhasil!")
-            break
+def periksa_pasien(dokter):
+    list_antrian = tampilkan_antrian()
 
-def lihat_daftar_antrian_dokter(user):
-    """Dokter melihat daftar antrian pasien"""
-    print("\n--- Daftar Antrian Pasien ---")
-
-    antrian_list = read_csv(ANTRIAN_FILE)
-    pasien_list = read_csv(PASIEN_FILE)
-
-    today = date.today().strftime("%Y-%m-%d")
-    antrian_dokter = [a for a in antrian_list if a['id_dokter'] == user['id_user'] and a['tanggal'] == today]
-
-    if not antrian_dokter:
-        print(">>> Tidak ada antrian untuk hari ini.")
+    if not list_antrian:
+        print("Tidak ada pasien dalam antrian saat ini.")
+        print("-" * 60)
+        input("\nTekan Enter untuk kembali...")
         return
 
-    print(f"\nTanggal: {today}")
-    print("-" * 60)
-    print(f"{'No':<5} {'No.Antrian':<12} {'Nama Pasien':<20} {'Keluhan':<15} {'Status':<10}")
-    print("-" * 60)
+    pasien_terpilih = list_antrian[0]
+    
+    print(f"\n[SEDANG MEMERIKSA] : {pasien_terpilih['nama']}")
+    print(f"Keluhan : {pasien_terpilih['keluhan']}")
+    print("-" * 30)
 
-    for i, antrian in enumerate(antrian_dokter, 1):
-        pasien = next((p for p in pasien_list if p['id_pasien'] == antrian['id_pasien']), None)
-        nama_pasien = pasien['nama'] if pasien else "N/A"
-        print(f"{i:<5} {antrian['no_antrian']:<12} {nama_pasien:<20} {antrian['keluhan'][:15]:<15} {antrian['status_antrian']:<10}")
-
-def periksa_pasien(user):
-    """Dokter melakukan pemeriksaan pasien"""
-    print("\n--- Periksa Pasien ---")
-
-    antrian_list = read_csv(ANTRIAN_FILE)
-    pasien_list = db.read_csv(PASIEN_FILE)
-
-    today = datetime.date.today().strftime("%Y-%m-%d")
-    antrian_menunggu = [a for a in antrian_list if a['id_dokter'] == user['id_user'] 
-                        and a['tanggal'] == today and a['status_antrian'] == "Menunggu"]
-
-    if not antrian_menunggu:
-        print(">>> Tidak ada pasien yang menunggu.")
-        return
-
-    # Ambil pasien pertama yang menunggu
-    antrian = antrian_menunggu[0]
-    pasien = next((p for p in pasien_list if p['id_pasien'] == antrian['id_pasien']), None)
+    diagnosa = input("Masukkan Diagnosa : ")
+    print("\n--- RESEP OBAT ---")
+    nama_obat    = input("Nama Obat    : ")
+    dosis        = input("Dosis (mg/gr): ")
+    aturan_pakai = input("Aturan Pakai : ")
+    catatan      = input("Catatan Tambahan (opsional): ")
+    
+    konfirmasi = input("\nSimpan data pemeriksaan & resep? (y/n): ")
+    if konfirmasi.lower() == 'y':
+        data_simpan = {
+            'id_antrian': pasien_terpilih['id_antrian'],
+            'id_pasien': pasien_terpilih['id_pasien'],
+            'id_dokter': dokter['id_user'],
+            'keluhan': pasien_terpilih['keluhan'],
+            'diagnosa': diagnosa,
+            'tanggal_periksa': datetime.datetime.now().strftime("%Y-%m-%d"),
+            'catatan': catatan
+        }
+        data_resep = {
+            'obat': nama_obat,
+            'dosis': dosis,
+            'aturan_pakai': aturan_pakai
+        }
+        db.simpan_diagnosa(data_simpan, data_resep)
+        db.update_status_antrian(pasien_terpilih['id_antrian'], 'selesai')
+        
+        print("\n[SUKSES] Data berhasil disimpan dan status antrian diperbarui.")
+    else:
+        print("\nPemeriksaan dibatalkan.")
+        
+    input("Tekan Enter untuk kembali...")
 
     if not pasien:
         print(">>> Data pasien tidak ditemukan!")
@@ -105,25 +115,19 @@ def periksa_pasien(user):
     # Input resep obat
     print("\n--- Input Resep Obat ---")
     while True:
-        obat = input("Nama Obat (kosongkan untuk selesai): ")
-        if not obat:
-            break
-        dosis = input("Dosis: ")
-        aturan_pakai = input("Aturan Pakai: ")
-
-        resep_data = {
-            "id_detail_resep": generate_id("RES"),
-            "riwayat_id": id_riwayat,
-            "obat": obat,
-            "dosis": dosis,
-            "aturan_pakai": aturan_pakai
-        }
-        append_csv(DETAIL_RESEP_FILE, resep_data)
-
-    # Update status antrian
-    for a in antrian_list:
-        if a['id_antrian'] == antrian['id_antrian']:
-            a['status_antrian'] = "Selesai"
+        print("\n=== MENU DOKTER SIPEKA ===")
+        print("1. Lihat Daftar Antrian")
+        print("2. Mulai Pemeriksaan")
+        print("3. Kembali ke Menu Utama")
+        
+        opsi = input("\nPilih menu: ")
+        
+        if opsi == '1':
+            tampilkan_antrian()
+            input("\nTekan Enter kembali...")
+        elif opsi == '2':
+            periksa_pasien(user)
+        elif opsi == '3':
             break
 
     fieldnames = ["id_antrian", "id_pasien", "id_dokter", "no_antrian", "keluhan", "tanggal", "jam", "status_antrian", "catatan"]

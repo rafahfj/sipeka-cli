@@ -1,2 +1,10 @@
 id_detail_resep,riwayat_id,obat,dosis,aturan_pakai
-RESe8c54f29,RIW9357280a,antichromium,10 x sehari,teleg
+
+RES-ANT167e30dc,ANT167e30dc,tolak angin,100,2x sehari
+RES-ANT5feb9b1b,ANT5feb9b1b,obat oles,250,3x sehari
+RES-ANTe8496b5d,ANTe8496b5d,panadol,50,1x sehari
+RES-ANT5efe9ae9,ANT5efe9ae9,bodrex,100gr,3x/hr
+RES-ANT137b14ed,ANT137b14ed,Bisoprolol, Atenolol,2,5gr,2x/hr
+RES-ANT8484ce45,ANT8484ce45,Bisoprolol, Atenolol,2,5gr,2x/hr
+RES-ANT33adde26,ANT33adde26,promag,200gr,3x/hr
+RES-ANTaa03db03,ANTaa03db03,promag,200gr,3x/hr

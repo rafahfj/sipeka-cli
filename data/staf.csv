@@ -1,4 +1,4 @@
 id_user,nama,username,password,email,jabatan,NIP,spesialisasi,kontak,jadwal,shift
 ADM4a432c09,Administrator,admin,240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9,admin@sipeka.com,Admin,000000000,,000000000000,,
-STF12fb0693,Rafah Ganteng,rafahganteng,98d8632e2d368ebf0f8116f2a81c313be21056ac5d25b8430ec5320e8b2e708a,Dokter123,Dokter,90909090,Umum,088111888118,"Senin, Selasa, Rabu",
-STFfc5f25f4,Rifa Ganteng,rifahaha,67b6e4ca8c0e3996590d2dd7fbba06d5a1cc80f06100c28c4eebb93aa306081a,rifahaha@gmail.com,Resepsionis,909090123,,088881818188,,Pagi
+STF06548f3c,rafah fajri,rafahh,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,rafahfajri@gmail.com,Dokter,21436587,mata,081223845490,08.00 - 15.00,
+STF393475f2,faza,faza,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,faza@gmail.com,Resepsionis,123456789,,081223845543,,Pagi
